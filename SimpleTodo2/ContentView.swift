@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @StateObject private var store = TaskStore()
+    @Environment(\.modelContext) private var context
+    @Query private var tasks: [Task]
     @State private var newTaskTitle = ""
 
     var body: some View {
@@ -25,10 +27,10 @@ struct ContentView: View {
                 .padding()
 
                 List {
-                    ForEach(store.tasks) { task in
-                        TaskRow(task: task, toggle: { store.toggle(task) })
+                    ForEach(tasks) { task in
+                        TaskRow(task: task, toggle: { toggle(task) })
                     }
-                    .onDelete(perform: store.delete)
+                    .onDelete(perform: delete)
                 }
                 .listStyle(PlainListStyle())
             }
@@ -38,8 +40,20 @@ struct ContentView: View {
 
     private func addTask() {
         guard !newTaskTitle.isEmpty else { return }
-        store.add(newTaskTitle)
+        let newTask = Task(title: newTaskTitle)
+        context.insert(newTask)
         newTaskTitle = ""
+    }
+
+    private func delete(_ offsets: IndexSet) {
+        for index in offsets {
+            let task = tasks[index]
+            context.delete(task)
+        }
+    }
+
+    private func toggle(_ task: Task) {
+        task.isCompleted.toggle()
     }
 }
 
@@ -60,4 +74,5 @@ struct TaskRow: View {
 
 #Preview {
     ContentView()
+        .modelContainer(for: Task.self, inMemory: true)
 }
