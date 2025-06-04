@@ -4,6 +4,8 @@ A simple, animated, and efficient iOS todo app built with SwiftUI.
 - Add and delete tasks with smooth animations
 - Mark tasks as complete or incomplete
 - Tasks are persisted locally using SwiftData
+- Format text (bold, italic, underline, strikethrough) when adding a task
+- Easily dismiss the keyboard with a toolbar button
 ## Requirements
 - Xcode 15 or later
 - iOS 17 or later
