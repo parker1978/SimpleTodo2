@@ -3,9 +3,9 @@ A simple, animated, and efficient iOS todo app built with SwiftUI.
 ## Features
 - Add and delete tasks with smooth animations
 - Mark tasks as complete or incomplete
-- Tasks are persisted locally using UserDefaults
+- Tasks are persisted locally using SwiftData
 ## Requirements
-- Xcode 12 or later
-- iOS 14 or later
+- Xcode 15 or later
+- iOS 17 or later
 ## Running the App
-Open the `SimpleTodoApp` folder in Xcode and build/run on the iOS Simulator or your device.
+Open the `SimpleTodo2` folder in Xcode and build/run on the iOS Simulator or your device.
