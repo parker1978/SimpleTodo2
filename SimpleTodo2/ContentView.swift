@@ -79,6 +79,14 @@ struct ContentView: View {
         }
     }
 
+    private func toggleWrap(prefix: String, suffix: String) {
+        if newTaskTitle.hasPrefix(prefix) && newTaskTitle.hasSuffix(suffix) {
+            newTaskTitle = String(newTaskTitle.dropFirst(prefix.count).dropLast(suffix.count))
+        } else {
+            newTaskTitle = prefix + newTaskTitle + suffix
+        }
+    }
+
     private func toggle(_ task: Task) {
         task.isCompleted.toggle()
     }
